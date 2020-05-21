@@ -1,4 +1,6 @@
 import random
+import string
+
 file = open("words.txt")
 text = file.read().split()
 file.close()
@@ -35,6 +37,5 @@ def get_difficulty():
 
 if __name__ == "__main__":
     word = (get_difficulty())
-    word_length = len(word)
-    print(f"The mystery word is {word_length} characters long.")
-    print(word)
+    print(f"The mystery word is {len(word)} characters long.")
+    

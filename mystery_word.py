@@ -36,11 +36,9 @@ def get_difficulty():
     return word
 
 
-
 if __name__ == "__main__":
     word = (get_difficulty())
     print(f"The mystery word is {len(word)} characters long.")
-    
     print("Word: " + " ".join(["_" for letter in word]))
     print("Letters already guessed: ")
     print("Guesses remaining: ")

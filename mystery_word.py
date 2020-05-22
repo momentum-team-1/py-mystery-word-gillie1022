@@ -35,13 +35,13 @@ def get_difficulty():
         return get_difficulty()
     return word
 
+def get_guess_list():
+    guess_list = []
+    guess_list.append(input("Guess a letter: ").upper())
+    return guess_list
 
 if __name__ == "__main__":
     word = (get_difficulty())
     print(f"The mystery word is {len(word)} characters long.")
-    print("Word: " + " ".join(["_" for letter in word]))
-    print("Letters already guessed: ")
-    print("Guesses remaining: ")
-    guess = input("Guess a letter: ")
-
-    
+    print("Mystery Word: " + " ".join(["_" for letter in word]))
+    guess = get_guess_list()

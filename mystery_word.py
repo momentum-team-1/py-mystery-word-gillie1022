@@ -37,8 +37,15 @@ def get_difficulty():
 
 def get_guess_list():
     guess_list = []
-    guess_list.append(input("Guess a letter: ").upper())
+    guess = input("Guess a letter: ").upper()
+    if len(guess) > 1:
+        print("Please guess a single letter")
+    else:    
+        guess_list.append(guess)
+    print(guess_list)
+    
     return guess_list
+
 
 if __name__ == "__main__":
     word = (get_difficulty())

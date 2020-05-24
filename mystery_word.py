@@ -23,6 +23,8 @@ hard_list = [
     if 8 <= len(word)
 ]
 
+guess_list = []
+
 def get_difficulty():
     difficulty = input("Please select a difficulty (e - Easy, n - Normal, h - Hard): ") 
     if difficulty == "e":
@@ -36,19 +38,36 @@ def get_difficulty():
     return word
 
 def get_guess_list():
-    guess_list = []
     guess = input("Guess a letter: ").upper()
-    if len(guess) > 1:
+    if len(guess) != 1:
         print("Please guess a single letter")
     else:    
         guess_list.append(guess)
-    print(guess_list)
-    
     return guess_list
 
+def display_word(word, guess_list):
+    return [letter if letter in guess_list else "_" for letter in word]
+
+def wrong_letters(word, guess_list):
+    return sorted(set(
+        letter
+        for letter in guess_list
+        if not letter in word
+    ))
+
+def game_play(word, guess_list):
+    while True:
+        guesses_remaining = 8 - len(wrong_letters(word, guess_list))
+        print(f"\nIncorrect letters: {' '.join(wrong_letters(word, guess_list))} \nMystery Word: {' '.join(display_word(word, guess_list))} \nYou have {guesses_remaining} guesses remaining.")
+        if "_" not in display_word(word, guess_list):
+            print(f"You win, the Mystery Word was {word}")
+            return
+        if guesses_remaining == 0: 
+            print(f"GAME OVER, the Mystery Word was {word}")
+            return
+        guess_list = get_guess_list()
 
 if __name__ == "__main__":
     word = (get_difficulty())
-    print(f"The mystery word is {len(word)} characters long.")
-    print("Mystery Word: " + " ".join(["_" for letter in word]))
-    guess = get_guess_list()
+    print(f"\nThe mystery word is {len(word)} characters long.")
+    game_play(word, guess_list)

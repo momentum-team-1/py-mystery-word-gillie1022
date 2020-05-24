@@ -74,7 +74,6 @@ def game_play(word):
         guess_list = get_guess_list(guess_list)
 
 def play_again():
-    # new_list = []
     if input("Would you like to play again? ") == "y":
         new_word = get_difficulty()
         game_play(new_word)

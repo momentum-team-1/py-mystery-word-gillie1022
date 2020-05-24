@@ -64,7 +64,7 @@ def game_play(word):
         print(f"Mystery Word: {' '.join(display_word(word, guess_list))}")
         print(f"You have {guesses_remaining} guesses remaining.")
         if "_" not in display_word(word, guess_list):
-            print(f"\nYou win, the Mystery Word was {word}")
+            print(f"\nYou win, the Mystery Word was {word}\n")
             play_again()
             return
         if guesses_remaining == 0: 
@@ -74,7 +74,7 @@ def game_play(word):
         guess_list = get_guess_list(guess_list)
 
 def play_again():
-    if input("Would you like to play again? ") == "y":
+    if input("Would you like to play again? (y/n): ") == "y":
         new_word = get_difficulty()
         game_play(new_word)
     return

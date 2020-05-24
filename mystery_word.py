@@ -58,16 +58,31 @@ def wrong_letters(word, guess_list):
 def game_play(word, guess_list):
     while True:
         guesses_remaining = 8 - len(wrong_letters(word, guess_list))
-        print(f"\nIncorrect letters: {' '.join(wrong_letters(word, guess_list))} \nMystery Word: {' '.join(display_word(word, guess_list))} \nYou have {guesses_remaining} guesses remaining.")
+        print(f"\nIncorrect letters: {' '.join(wrong_letters(word, guess_list))}")
+        print(f"Mystery Word: {' '.join(display_word(word, guess_list))}")
+        print(f"You have {guesses_remaining} guesses remaining.")
         if "_" not in display_word(word, guess_list):
-            print(f"You win, the Mystery Word was {word}")
+            print(f"\nYou win, the Mystery Word was {word}")
             return
         if guesses_remaining == 0: 
-            print(f"GAME OVER, the Mystery Word was {word}")
+            print(f"\nGAME OVER, the Mystery Word was {word}")
             return
         guess_list = get_guess_list()
+
+def play_again():
+    again = input("Would you like to play again? ")
+    if again == "y":
+        word = (get_difficulty())
+        print(f"\nThe mystery word is {len(word)} characters long.")
+        game_play(word, guess_list)
+        play_again()
+    return
 
 if __name__ == "__main__":
     word = (get_difficulty())
     print(f"\nThe mystery word is {len(word)} characters long.")
     game_play(word, guess_list)
+    guess_list = []
+    print("\n")
+    play_again()
+        

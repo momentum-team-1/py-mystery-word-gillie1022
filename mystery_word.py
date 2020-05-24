@@ -83,6 +83,3 @@ def play_again():
 if __name__ == "__main__":
     word = (get_difficulty())
     game_play(word)
-    # guess_list = []
-    # play_again()
-        

@@ -26,7 +26,7 @@ hard_list = [
 guess_list = []
 
 def get_difficulty():
-    difficulty = input("Please select a difficulty (e - Easy, n - Normal, h - Hard): ") 
+    difficulty = input("\nPlease select a difficulty (e - Easy, n - Normal, h - Hard): ") 
     if difficulty == "e":
         word = random.choice(easy_list)
     elif difficulty == "n":
@@ -35,9 +35,10 @@ def get_difficulty():
         word = random.choice(hard_list)
     else:
         return get_difficulty()
+    print(f"\nThe mystery word is {len(word)} characters long.")
     return word
 
-def get_guess_list():
+def get_guess_list(guess_list):
     guess = input("Guess a letter: ").upper()
     if len(guess) != 1:
         print("Please guess a single letter")
@@ -55,7 +56,8 @@ def wrong_letters(word, guess_list):
         if not letter in word
     ))
 
-def game_play(word, guess_list):
+def game_play(word):
+    guess_list = []
     while True:
         guesses_remaining = 8 - len(wrong_letters(word, guess_list))
         print(f"\nIncorrect letters: {' '.join(wrong_letters(word, guess_list))}")
@@ -63,26 +65,24 @@ def game_play(word, guess_list):
         print(f"You have {guesses_remaining} guesses remaining.")
         if "_" not in display_word(word, guess_list):
             print(f"\nYou win, the Mystery Word was {word}")
+            play_again()
             return
         if guesses_remaining == 0: 
-            print(f"\nGAME OVER, the Mystery Word was {word}")
+            print(f"\nGAME OVER, the Mystery Word was {word}\n")
+            play_again()
             return
-        guess_list = get_guess_list()
+        guess_list = get_guess_list(guess_list)
 
 def play_again():
-    again = input("Would you like to play again? ")
-    if again == "y":
-        word = (get_difficulty())
-        print(f"\nThe mystery word is {len(word)} characters long.")
-        game_play(word, guess_list)
-        play_again()
+    # new_list = []
+    if input("Would you like to play again? ") == "y":
+        new_word = get_difficulty()
+        game_play(new_word)
     return
 
 if __name__ == "__main__":
     word = (get_difficulty())
-    print(f"\nThe mystery word is {len(word)} characters long.")
-    game_play(word, guess_list)
-    guess_list = []
-    print("\n")
-    play_again()
+    game_play(word)
+    # guess_list = []
+    # play_again()
         
